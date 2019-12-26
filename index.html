@@ -1,5 +1,259 @@
 <html>
 <body>
-hello
+<article class="markdown-body entry-content p-5" itemprop="text"><h1><a id="user-content-aws-maven-wagon" class="anchor" aria-hidden="true" href="#aws-maven-wagon"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AWS Maven Wagon</h1>
+<p><a href="https://opensource.org/licenses/Apache-2.0" rel="nofollow"><img src="https://camo.githubusercontent.com/8051e9938a1ab39cf002818dfceb6b6092f34d68/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d417061636865253230322e302d626c75652e737667" alt="License" data-canonical-src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" style="max-width:100%;"></a></p>
+<h2><a id="user-content-description" class="anchor" aria-hidden="true" href="#description"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Description</h2>
+<p>This project is a fork of a <a href="https://github.com/spring-projects/aws-maven">Maven Wagon</a> for <a href="http://aws.amazon.com/s3/" rel="nofollow">Amazon S3</a>.<br>
+In order to to publish artifacts to an S3 bucket, the user (as identified by their access key) must have several permissions on the S3 bucket (PutObject, PutObjectAcl, GetObject).</p>
+<h2><a id="user-content-why-this-fork" class="anchor" aria-hidden="true" href="#why-this-fork"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why this fork?</h2>
+<ul>
+<li>if you want to deploy to the limited-access S3 buckets (no public access, no ownership).</li>
+</ul>
+<h2><a id="user-content-usage" class="anchor" aria-hidden="true" href="#usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<h3><a id="user-content-setting-up-s3-bucket-and-permissions" class="anchor" aria-hidden="true" href="#setting-up-s3-bucket-and-permissions"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting up S3 bucket and permissions</h3>
+<p>Create a bucket on your S3: note the region, block public access to it, and set a policy.
+Here's a policy that worked for me:</p>
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>Version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2008-10-17<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Id<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Policy&lt;SOMENUMBERHERE&gt;<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Statement<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>Sid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;SOMEIDHERE&gt;<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Effect<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Allow<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Principal<span class="pl-pds">"</span></span>: {
+                <span class="pl-s"><span class="pl-pds">"</span>AWS<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>arn:aws:iam::&lt;XXXXXX&gt;:user/&lt;USERNAME&gt;<span class="pl-pds">"</span></span>
+            },
+            <span class="pl-s"><span class="pl-pds">"</span>Action<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>s3:ListBucket<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Resource<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>arn:aws:s3:::&lt;BUCKET&gt;<span class="pl-pds">"</span></span>
+        },
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>Sid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;SOMEOTHERIDHERE&gt;<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Effect<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Allow<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Principal<span class="pl-pds">"</span></span>: {
+                <span class="pl-s"><span class="pl-pds">"</span>AWS<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>arn:aws:iam::&lt;XXXXXXX&gt;:user/&lt;USERNAME&gt;<span class="pl-pds">"</span></span>
+            },
+            <span class="pl-s"><span class="pl-pds">"</span>Action<span class="pl-pds">"</span></span>: [
+                <span class="pl-s"><span class="pl-pds">"</span>s3:GetObject<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>s3:PutObject<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>s3:PutObjectAcl<span class="pl-pds">"</span></span>
+            ],
+            <span class="pl-s"><span class="pl-pds">"</span>Resource<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>arn:aws:s3:::&lt;BUCKET&gt;/*<span class="pl-pds">"</span></span>
+        }
+    ]
+}</pre></div>
+<p>Make sure the user listed above (arn:aws:iam....) has at least these permissions (IAM -&gt; Policies):</p>
+<div class="highlight highlight-source-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>Version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>2012-10-17<span class="pl-pds">"</span></span>,
+    <span class="pl-s"><span class="pl-pds">"</span>Statement<span class="pl-pds">"</span></span>: [
+        {
+            <span class="pl-s"><span class="pl-pds">"</span>Sid<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>&lt;WHATEVER&gt;<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Effect<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>Allow<span class="pl-pds">"</span></span>,
+            <span class="pl-s"><span class="pl-pds">"</span>Action<span class="pl-pds">"</span></span>: [
+                <span class="pl-s"><span class="pl-pds">"</span>s3:PutObject<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>s3:PutObjectAcl<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>s3:GetObject<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>s3:ListBucket<span class="pl-pds">"</span></span>
+            ],
+            <span class="pl-s"><span class="pl-pds">"</span>Resource<span class="pl-pds">"</span></span>: [
+                <span class="pl-s"><span class="pl-pds">"</span>arn:aws:s3:::&lt;BUCKET&gt;/*<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>arn:aws:s3:::&lt;BUCKET&gt;<span class="pl-pds">"</span></span>
+            ]
+        }
+    ]
+}</pre></div>
+<h3><a id="user-content-setting-up-your-aws-credentials-in-your-local-machine" class="anchor" aria-hidden="true" href="#setting-up-your-aws-credentials-in-your-local-machine"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setting up your AWS credentials in your local machine</h3>
+<p>Look at your <code>~/.aws/</code> folder, create one if missing.
+A file <code>config</code> must contain at least:</p>
+<div class="highlight highlight-source-shell"><pre>[default]
+region=<span class="pl-k">&lt;</span>YOUR BUCKET REGION ID, FOR INSTANCE eu-central-<span class="pl-k">1&gt;</span></pre></div>
+<p>A file <code>credentials</code> must contain:</p>
+<div class="highlight highlight-source-shell"><pre>[default]
+aws_access_key_id=<span class="pl-k">&lt;</span>ACCESS KEY OF YOUR USER<span class="pl-k">&gt;</span>
+aws_secret_access_key=<span class="pl-k">&lt;</span>SECRET ACCESS KEY OF YOUR USER<span class="pl-k">&gt;</span></pre></div>
+<p>Alternatively, the access and secret keys for the account can be provided using (applied in order below)</p>
+<ul>
+<li><code>aws.accessKeyId</code> and <code>aws.secretKey</code> <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/SystemPropertiesCredentialsProvider.html" rel="nofollow">system properties</a></li>
+<li><code>AWS_ACCESS_KEY_ID</code> (or <code>AWS_ACCESS_KEY</code>) and <code>AWS_SECRET_KEY</code> (or <code>AWS_SECRET_ACCESS_KEY</code>) <a href="http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/EnvironmentVariableCredentialsProvider.html" rel="nofollow">environment variables</a></li>
+<li>The Amazon EC2 <a href="https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/EC2ContainerCredentialsProviderWrapper.html" rel="nofollow">Instance Metadata Service</a></li>
+</ul>
+<h3><a id="user-content-preparing-maven-to-recognize-s3-protocol" class="anchor" aria-hidden="true" href="#preparing-maven-to-recognize-s3-protocol"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparing Maven to recognize S3 protocol</h3>
+<p>The <code>~/.m2/settings.xml</code> must be updated to reference S3 Wagon:</p>
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">settings</span>&gt;
+  ...
+  &lt;<span class="pl-ent">servers</span>&gt;
+    ...
+    &lt;<span class="pl-ent">server</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;aws-release&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">configuration</span>&gt;
+        &lt;<span class="pl-ent">wagonProvider</span>&gt;s3&lt;/<span class="pl-ent">wagonProvider</span>&gt;
+      &lt;/<span class="pl-ent">configuration</span>&gt;
+    &lt;/<span class="pl-ent">server</span>&gt;
+    &lt;<span class="pl-ent">server</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;aws-snapshot&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">configuration</span>&gt;
+        &lt;<span class="pl-ent">wagonProvider</span>&gt;s3&lt;/<span class="pl-ent">wagonProvider</span>&gt;
+      &lt;/<span class="pl-ent">configuration</span>&gt;
+    &lt;/<span class="pl-ent">server</span>&gt;
+    ...
+  &lt;/<span class="pl-ent">servers</span>&gt;
+  ...
+&lt;/<span class="pl-ent">settings</span>&gt;</pre></div>
+<h3><a id="user-content-publishing-maven-artifacts" class="anchor" aria-hidden="true" href="#publishing-maven-artifacts"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Publishing Maven artifacts</h3>
+<p>A S3 build extension must be defined in your maven <em>artifact</em>'s <code>pom.xml</code>.</p>
+<p>The latest version of the wagon can be found at <a href="http://rytisjunka.github.io" rel="nofollow">http://rytisjunka.github.io</a></p>
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">project</span>&gt;
+  ...
+&lt;<span class="pl-ent">pluginRepositories</span>&gt;
+    ...
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> public github repository, hosts a proper aws s3 plugin for private repos <span class="pl-c">--&gt;</span></span>
+	&lt;<span class="pl-ent">pluginRepository</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;rytisjukna-plugins&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">name</span>&gt;Rytis Jukna plugins&lt;/<span class="pl-ent">name</span>&gt;
+      &lt;<span class="pl-ent">url</span>&gt;https://rytisjukna.github.io/artifacts&lt;/<span class="pl-ent">url</span>&gt;
+
+      &lt;<span class="pl-ent">releases</span>&gt;
+        &lt;<span class="pl-ent">enabled</span>&gt;true&lt;/<span class="pl-ent">enabled</span>&gt;
+        &lt;<span class="pl-ent">updatePolicy</span>&gt;never&lt;/<span class="pl-ent">updatePolicy</span>&gt;
+      &lt;/<span class="pl-ent">releases</span>&gt;
+      &lt;<span class="pl-ent">snapshots</span>&gt;
+        &lt;<span class="pl-ent">enabled</span>&gt;false&lt;/<span class="pl-ent">enabled</span>&gt;
+        &lt;<span class="pl-ent">updatePolicy</span>&gt;never&lt;/<span class="pl-ent">updatePolicy</span>&gt;
+      &lt;/<span class="pl-ent">snapshots</span>&gt;
+      &lt;<span class="pl-ent">layout</span>&gt;default&lt;/<span class="pl-ent">layout</span>&gt;
+    &lt;/<span class="pl-ent">pluginRepository</span>&gt;
+    ...
+&lt;/<span class="pl-ent">pluginRepositories</span>&gt;
+
+  ...
+  &lt;<span class="pl-ent">build</span>&gt;
+    ...
+    &lt;<span class="pl-ent">extensions</span>&gt;
+      ...
+      &lt;<span class="pl-ent">extension</span>&gt;
+        <span class="pl-c"><span class="pl-c">&lt;!--</span> allows using private S3 bucket for Maven artifact repo <span class="pl-c">--&gt;</span></span>
+        &lt;<span class="pl-ent">groupId</span>&gt;com.github.rytisjukna&lt;/<span class="pl-ent">groupId</span>&gt;
+        &lt;<span class="pl-ent">artifactId</span>&gt;aws-maven&lt;/<span class="pl-ent">artifactId</span>&gt;
+        &lt;<span class="pl-ent">version</span>&gt;6.0.1&lt;/<span class="pl-ent">version</span>&gt;
+      &lt;/<span class="pl-ent">extension</span>&gt;
+      ...
+    &lt;/<span class="pl-ent">extensions</span>&gt;
+    ...
+  &lt;/<span class="pl-ent">build</span>&gt;
+  ...
+&lt;/<span class="pl-ent">project</span>&gt;</pre></div>
+<p>Once the build extension is configured, the distribution management repositories can be defined in the maven <em>artifact</em>'s <code>pom.xml</code> with an <code>s3://</code> scheme.</p>
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">project</span>&gt;
+  ...
+  &lt;<span class="pl-ent">distributionManagement</span>&gt;
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> our private secret repo for Maven artifacts <span class="pl-c">--&gt;</span></span>
+    &lt;<span class="pl-ent">repository</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;aws-release&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">name</span>&gt;AWS Release Repository&lt;/<span class="pl-ent">name</span>&gt;
+      &lt;<span class="pl-ent">url</span>&gt;s3://&lt;<span class="pl-ent">BUCKET</span>&gt;/release&lt;/<span class="pl-ent">url</span>&gt;
+    &lt;/<span class="pl-ent">repository</span>&gt;
+    &lt;<span class="pl-ent">snapshotRepository</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;aws-snapshot&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">name</span>&gt;AWS Snapshot Repository&lt;/<span class="pl-ent">name</span>&gt;
+      &lt;<span class="pl-ent">url</span>&gt;s3://&lt;<span class="pl-ent">BUCKET</span>&gt;/snapshot&lt;/<span class="pl-ent">url</span>&gt;
+    &lt;/<span class="pl-ent">snapshotRepository</span>&gt;
+  &lt;/<span class="pl-ent">distributionManagement</span>&gt;
+  ...
+&lt;/<span class="pl-ent">project</span>&gt;</pre></div>
+<p>You publish your artifacts to S3 bucket by simple</p>
+<div class="highlight highlight-source-shell"><pre>mvn deploy</pre></div>
+<h3><a id="user-content-consuming-maven-artifacts" class="anchor" aria-hidden="true" href="#consuming-maven-artifacts"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consuming Maven artifacts</h3>
+<p>Your <em>project</em> <code>pom.xml</code> file should refer to the public Github repo for the plugin, and for the private artifact repo on S3:</p>
+<div class="highlight highlight-text-xml"><pre>...
+&lt;<span class="pl-ent">pluginRepositories</span>&gt;
+    ...
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> public github repository, hosts a proper aws s3 plugin for private repos <span class="pl-c">--&gt;</span></span>
+	&lt;<span class="pl-ent">pluginRepository</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;rytisjukna-plugins&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">url</span>&gt;https://rytisjukna.github.io/artifacts&lt;/<span class="pl-ent">url</span>&gt;
+      &lt;<span class="pl-ent">releases</span>&gt;
+        &lt;<span class="pl-ent">enabled</span>&gt;true&lt;/<span class="pl-ent">enabled</span>&gt;
+        &lt;<span class="pl-ent">updatePolicy</span>&gt;never&lt;/<span class="pl-ent">updatePolicy</span>&gt;
+      &lt;/<span class="pl-ent">releases</span>&gt;
+      &lt;<span class="pl-ent">snapshots</span>&gt;
+        &lt;<span class="pl-ent">enabled</span>&gt;false&lt;/<span class="pl-ent">enabled</span>&gt;
+        &lt;<span class="pl-ent">updatePolicy</span>&gt;never&lt;/<span class="pl-ent">updatePolicy</span>&gt;
+      &lt;/<span class="pl-ent">snapshots</span>&gt;
+      &lt;<span class="pl-ent">layout</span>&gt;default&lt;/<span class="pl-ent">layout</span>&gt;
+    &lt;/<span class="pl-ent">pluginRepository</span>&gt;
+    ...
+&lt;/<span class="pl-ent">pluginRepositories</span>&gt;
+&lt;<span class="pl-ent">repositories</span>&gt;
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> our private secret repo for Maven artifacts <span class="pl-c">--&gt;</span></span>
+     &lt;<span class="pl-ent">repository</span>&gt;
+      &lt;<span class="pl-ent">id</span>&gt;aws-release&lt;/<span class="pl-ent">id</span>&gt;
+      &lt;<span class="pl-ent">name</span>&gt;our private AWS Release Repository&lt;/<span class="pl-ent">name</span>&gt;
+      &lt;<span class="pl-ent">url</span>&gt;s3://&lt;<span class="pl-ent">BUCKET</span>&gt;/release&lt;/<span class="pl-ent">url</span>&gt;
+    &lt;/<span class="pl-ent">repository</span>&gt;
+&lt;/<span class="pl-ent">repositories</span>&gt;
+  ...
+  &lt;<span class="pl-ent">build</span>&gt;
+    ...
+    &lt;<span class="pl-ent">extensions</span>&gt;
+      ...
+      &lt;<span class="pl-ent">extension</span>&gt;
+        <span class="pl-c"><span class="pl-c">&lt;!--</span> allows using private S3 bucket for Maven artifact repo <span class="pl-c">--&gt;</span></span>
+        &lt;<span class="pl-ent">groupId</span>&gt;com.github.rytisjukna&lt;/<span class="pl-ent">groupId</span>&gt;
+        &lt;<span class="pl-ent">artifactId</span>&gt;aws-maven&lt;/<span class="pl-ent">artifactId</span>&gt;
+        &lt;<span class="pl-ent">version</span>&gt;6.0.1&lt;/<span class="pl-ent">version</span>&gt;
+      &lt;/<span class="pl-ent">extension</span>&gt;
+      ...
+    &lt;/<span class="pl-ent">extensions</span>&gt;
+    ...
+  &lt;/<span class="pl-ent">build</span>&gt;
+</pre></div>
+<h3><a id="user-content-connecting-through-a-proxy" class="anchor" aria-hidden="true" href="#connecting-through-a-proxy"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Connecting through a Proxy</h3>
+<p>For being able to connect behind an HTTP proxy you need to add the following configuration to <code>~/.m2/settings.xml</code>:</p>
+<div class="highlight highlight-text-xml"><pre>&lt;<span class="pl-ent">settings</span>&gt;
+  ...
+  &lt;<span class="pl-ent">proxies</span>&gt;
+     ...
+     &lt;<span class="pl-ent">proxy</span>&gt;
+         &lt;<span class="pl-ent">active</span>&gt;true&lt;/<span class="pl-ent">active</span>&gt;
+         &lt;<span class="pl-ent">protocol</span>&gt;s3&lt;/<span class="pl-ent">protocol</span>&gt;
+         &lt;<span class="pl-ent">host</span>&gt;myproxy.host.com&lt;/<span class="pl-ent">host</span>&gt;
+         &lt;<span class="pl-ent">port</span>&gt;8080&lt;/<span class="pl-ent">port</span>&gt;
+         &lt;<span class="pl-ent">username</span>&gt;proxyuser&lt;/<span class="pl-ent">username</span>&gt;
+         &lt;<span class="pl-ent">password</span>&gt;somepassword&lt;/<span class="pl-ent">password</span>&gt;
+         &lt;<span class="pl-ent">nonProxyHosts</span>&gt;www.google.com|*.somewhere.com&lt;/<span class="pl-ent">nonProxyHosts</span>&gt;
+     &lt;/<span class="pl-ent">proxy</span>&gt;
+     ...
+    &lt;/<span class="pl-ent">proxies</span>&gt;
+  ...
+&lt;/<span class="pl-ent">settings</span>&gt;</pre></div>
+<h2><a id="user-content-release-notes" class="anchor" aria-hidden="true" href="#release-notes"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Release Notes</h2>
+<ul>
+<li>
+<p><code>6.0.1</code></p>
+<ul>
+<li>don't need owner permissions to upload/download from the S3 bucket.</li>
+<li>make sure you have region and access tokens listed in ~/.aws/ folder</li>
+</ul>
+</li>
+<li>
+<p><code>6.0.0</code></p>
+<ul>
+<li>Updated to the latest versions of aws-sdk and maven-wagon.</li>
+<li>Changed order of aws credential resolution strategy.</li>
+<li>Added support of all regions defined in aws-sdk.</li>
+</ul>
+</li>
+</ul>
+<h2><a id="user-content-license" class="anchor" aria-hidden="true" href="#license"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>License</h2>
+<p>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+</article>
 </body>
 </html>
